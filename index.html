@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Praisey 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #ff5fa2, #8e44ad);
+  color: white;
+  overflow: hidden;
+  transition: background 0.4s;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#yes { background: #ffd700; color: black; }
+#maybe { background: #eee; color: black; }
+#no { background: #ff3b3b; color: white; }
+
+.hidden { display: none; }
+
+/* hearts */
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-600px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1">
+  <h1>Praisey… will you marry me? 💍😂</h1>
+  <div class="buttons">
+    <button id="yes">YES</button>
+    <button id="maybe">MAYBE</button>
+    <button id="no">NO</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="hidden">
+  <h1>Thumbprint here to seal it 🤍</h1>
+  <button id="thumb" style="
+    width:140px;
+    height:180px;
+    border-radius:80px;
+    background: linear-gradient(135deg,#ff9acb,#ff2f92);
+    font-size:20px;
+    font-weight:bold;
+    color:white;
+  ">PRESS</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="hidden">
+  <h1>Congratulations 💖</h1>
+  <p>This is our forever joke 😌<br>You’re my person for life.</p>
+  <h2><b>FOREVER</b></h2>
+</div>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const maybe = document.getElementById("maybe");
+
+let scale = 1;
+
+no.onclick = () => {
+  scale += 0.4;
+  yes.style.transform = `scale(${scale})`;
+  document.body.style.background = "red";
+  setTimeout(() => {
+    document.body.style.background = "linear-gradient(135deg, #ff5fa2, #8e44ad)";
+  }, 400);
+};
+
+maybe.onclick = () => maybe.style.display = "none";
+
+yes.onclick = () => {
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+  spawnHearts(80);
+};
+
+document.getElementById("thumb").onclick = () => {
+  document.getElementById("page2").classList.add("hidden");
+  document.getElementById("page3").classList.remove("hidden");
+  document.body.style.background = "green";
+  spawnHearts(150);
+};
+
+function spawnHearts(count) {
+  for (let i = 0; i < count; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+    heart.style.fontSize = (20 + Math.random() * 30) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }
+}
+</script>
+
+</body>
+</html>
